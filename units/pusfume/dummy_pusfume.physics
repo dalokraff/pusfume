@@ -1,0 +1,17 @@
+actors = [
+	{
+		enabled = true
+		mass = 1
+		name = "g_body_LOD1"
+		node = "g_body_LOD1"
+		shapes = [
+			{
+				material = "default"
+				shape = "g_body_LOD1"
+				template = "default"
+				type = "sphere"
+			}
+		]
+		template = "keyframed_no_collision"
+	},
+]

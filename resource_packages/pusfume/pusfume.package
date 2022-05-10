@@ -1,0 +1,23 @@
+mod = [
+	"pusfume"
+]
+
+package = [
+	"resource_packages/pusfume/pusfume"
+]
+
+lua = [
+	"scripts/mods/pusfume/*"
+]
+
+unit = [
+  "units/*"
+]
+
+texture = [
+  "textures/*"
+]
+
+wwise_dep = [
+  "wwise/*"
+]
