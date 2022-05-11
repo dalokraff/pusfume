@@ -29,7 +29,7 @@ data = {
         slot11 = "p_armor"
     }
 
-    mat_to_use = "units/weapons/player/wpn_empire_handgun_02_t2/wpn_empire_handgun_02_t2_3p"
+    mat_to_use = "units/beings/player/way_watcher_maiden_guard/headpiece/ww_mg_hat_12"
 
     colors = {
         slot1 = "textures/pusfume/inn/gl_d"
@@ -48,21 +48,21 @@ data = {
         slot1 = "textures/pusfume/inn/gl_n"
 		slot2 = "textures/pusfume/inn/pusfume_eyenormal"
         slot3 = "textures/pusfume/inn/psf_fur_n"
-        // slot4 = "textures/mgpan_nr"
+        slot4 = "textures/mgpan_nr"
         slot5 = "textures/pusfume/inn/psf_whiskers_n"
         slot6 = "textures/pusfume/inn/haliberdnorm"
         slot7 = "textures/pusfume/inn/psf_body_n"
-        // slot8 = "textures/pusfume/inn/cloth_d"
+        slot8 = "textures/pusfume/inn/cloth_d"
         slot9 = "textures/pusfume/inn/ammo1_n"
         slot10 = "textures/pusfume/inn/gunnorm"
         slot11 = "textures/pusfume/inn/armor_normal"
     }
     MABs = {
         slot1 = "textures/pusfume/inn/gl_s"
-		// slot2 = "textures/mgpan_maob"
+		slot2 = "textures/mgpan_maob"
         slot3 = "textures/pusfume/inn/psf_fur_s"
-        // slot4 = "textures/mgpan_maob"
-        // slot5 = "textures/pusfume/inn/psf_whiskers_d"
+        slot4 = "textures/mgpan_maob"
+        slot5 = "textures/pusfume/inn/psf_whiskers_d"
         slot6 = "textures/pusfume/inn/haliberdspec"
         slot7 = "textures/pusfume/inn/psf_body_s"
         slot8 = "textures/pusfume/inn/cloth_s"
