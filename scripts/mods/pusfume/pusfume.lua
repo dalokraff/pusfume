@@ -17,6 +17,6 @@ mod:command("spawn_pusfume", "", function()
     local unit_spawner = Managers.state.unit_spawner
     local unit_template_name = "interaction_unit"
     local extension_init_data = {}
-    local unit, go_id = unit_spawner:spawn_network_unit("units/pusfume/dummy_pusfume", unit_template_name, extension_init_data, position, rotation)
+    local unit, go_id = unit_spawner:spawn_network_unit("units/pusfume/pusfume_inn", unit_template_name, extension_init_data, position, rotation)
 end)
 

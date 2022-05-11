@@ -1,0 +1,126 @@
+
+events = {
+	idle = {
+	}
+	interact = {
+	}
+	ragdoll = {
+	}
+}
+layers = [
+	{
+		default_state = "base/idle"
+		states = [
+			{
+				animations = [
+					"units/pusfume/anims/pusfume_inn_idle",
+				]
+				loop_animation = true
+				name = "base/idle"
+				randomization_type = "every_loop"
+				root_driving = "ignore"
+				speed = "1"
+				state_type = "regular"
+				transitions = [
+					{
+						blend_time = 0.2
+						event = "interact"
+						mode = "direct"
+						on_beat = ""
+						to = "base/interact"
+					}
+					{
+						blend_time = 0.2
+						event = "death"
+						mode = "direct"
+						on_beat = ""
+						to = "base/death"
+					}
+				]
+				weights = [
+					"5.0",
+					"2.0",
+					"2.0",
+					"1.0"
+				]
+			}
+			{
+				animations = [
+					"units/pusfume/anims/pusfume_inn_idle"
+				]
+				loop_animation = false
+				name = "base/interact"
+				randomization_type = "every_loop"
+				root_driving = "ignore"
+				speed = "1"
+				state_type = "regular"
+				transitions = [
+					{
+						blend_time = 0.2
+						event = "idle"
+						mode = "direct"
+						on_beat = "base/interact"
+						on = "base/interact"
+						to = "base/idle"
+					}
+					{
+						blend_time = 0.2
+						event = "interact"
+						mode = "direct"
+						on_beat = ""
+						to = "base/interact"
+					}
+					{
+						blend_time = 0.2
+						event = "death"
+						mode = "direct"
+						on_beat = ""
+						to = "base/death"
+					}
+				]
+				weights = [
+					"1.0"
+				]
+			}
+			{
+				name = "base/death"
+				ragdoll = "ragdoll"
+				state_type = "ragdoll"
+				transitions = [
+					{
+						blend_time = 0.2
+						event = "idle"
+						mode = "direct"
+						on_beat = ""
+						to = "base/idle"
+					}
+					{
+						blend_time = 0.2
+						event = "death"
+						mode = "direct"
+						on_beat = ""
+						to = "base/death"
+					}
+					{
+						blend_time = 0.2
+						event = "ragdoll"
+						mode = "direct"
+						on_beat = ""
+						to = "base/death"
+					}
+				]
+			}
+		]
+	}
+]
+ragdolls = {
+	ragdoll = {
+		actors = [
+		]
+		keyframed = [
+		]
+	}
+}
+variables = {
+	move_speed = 1
+}

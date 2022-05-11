@@ -1,6 +1,6 @@
 local mod = get_mod("pusfume")
 
-local unit_path = "units/pusfume/dummy_pusfume"
+local unit_path = "units/pusfume/pusfume_inn"
 local num_inv = #NetworkLookup.inventory_packages
 local num_husk = #NetworkLookup.husks
 local num_interacts = #NetworkLookup.interactions
