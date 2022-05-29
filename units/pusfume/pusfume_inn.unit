@@ -17,63 +17,75 @@ data = {
     
     mat_slots = {
         slot1 = "p_glob"
-		slot2 = "p_eye_g"
-        slot3 = "p_fur"
-        slot4 = "p_eye"
-        slot5 = "p_whiskers"
-        slot6 = "p_metal"
-        slot7 = "p_main"
-        slot8 = "p_bag1"
-        slot9 = "p_bag2"
-        slot10 = "p_jezzail"
-        slot11 = "p_armor"
+        slot2= "p_metal"
+        slot3= "p_main"
+        slot4 = "p_bag1"
+        slot5 = "p_bag2"
+        slot6 = "p_jezzail"
+        slot7 = "p_armor"
+        slot8 = "p_eye_g"
+        slot9 = "p_eye"
     }
 
-    mat_to_use = "units/beings/player/way_watcher_maiden_guard/headpiece/ww_mg_hat_12"
+    // mat_to_use = "units/weapons/player/wpn_empire_handgun_02_t2/wpn_empire_handgun_02_t2_3p"
+    mat_to_use = "units/weapons/player/wpn_we_dagger_01_t1/wpn_we_dagger_01_t1_runed_01_3p"
+    // mat_package = "units/beings/player/empire_soldier_breton/skins/black_and_gold/chr_empire_soldier_breton_black_and_gold"
 
     colors = {
         slot1 = "textures/pusfume/inn/gl_d"
-		slot2 = "textures/pusfume/inn/pusfume_eyegoggle"
-        slot3 = "textures/pusfume/inn/psf_fur_d"
-        slot4 = "textures/pusfume/inn/skaven_eyemask"
-        slot5 = "textures/pusfume/inn/psf_whiskers_d"
-        slot6 = "textures/pusfume/inn/haliberd"
-        slot7 = "textures/pusfume/inn/p_body_d"
-        slot8 = "textures/pusfume/inn/cloth_d"
-        slot9 = "textures/pusfume/inn/ammo1_d"
-        slot10 = "textures/pusfume/inn/gun"
-        slot11 = "textures/pusfume/inn/armortext"
+        slot2 = "textures/pusfume/inn/haliberd"
+        slot3 = "textures/pusfume/inn/p_body_d"
+        slot4 = "textures/pusfume/inn/cloth_d"
+        slot5 = "textures/pusfume/inn/ammo1_d"
+        slot6 = "textures/pusfume/inn/gun"
+        slot7 = "textures/pusfume/inn/armortext"
+        slot8 = "textures/pusfume/inn/pusfume_eyegoggle"
+        slot9 = "textures/pusfume/inn/skaven_eyemask"
     }
     normals = {
         slot1 = "textures/pusfume/inn/gl_n"
-		slot2 = "textures/pusfume/inn/pusfume_eyenormal"
-        slot3 = "textures/pusfume/inn/psf_fur_n"
-        slot4 = "textures/mgpan_nr"
-        slot5 = "textures/pusfume/inn/psf_whiskers_n"
-        slot6 = "textures/pusfume/inn/haliberdnorm"
-        slot7 = "textures/pusfume/inn/psf_body_n"
-        slot8 = "textures/pusfume/inn/cloth_d"
-        slot9 = "textures/pusfume/inn/ammo1_n"
-        slot10 = "textures/pusfume/inn/gunnorm"
-        slot11 = "textures/pusfume/inn/armor_normal"
+        slot2 = "textures/pusfume/inn/haliberdnorm"
+        slot3 = "textures/pusfume/inn/psf_body_n"
+        slot4 = "textures/pusfume/inn/cloth_d"
+        slot5 = "textures/pusfume/inn/ammo1_n"
+        slot6 = "textures/pusfume/inn/gunnorm"
+        slot7 = "textures/pusfume/inn/armor_normal"
+        slot8 = "textures/pusfume/inn/pusfume_eyenormal"
+        slot9 = "textures/pusfume/inn/pusfume_eyenormal"
     }
     MABs = {
         slot1 = "textures/pusfume/inn/gl_s"
-		slot2 = "textures/mgpan_maob"
-        slot3 = "textures/pusfume/inn/psf_fur_s"
-        slot4 = "textures/mgpan_maob"
-        slot5 = "textures/pusfume/inn/psf_whiskers_d"
-        slot6 = "textures/pusfume/inn/haliberdspec"
-        slot7 = "textures/pusfume/inn/psf_body_s"
-        slot8 = "textures/pusfume/inn/cloth_s"
-        slot9 = "textures/pusfume/inn/ammo1_s"
-        slot10 = "textures/pusfume/inn/gunspec"
-        slot11 = "textures/pusfume/inn/armorspec"
+        slot2 = "textures/pusfume/inn/haliberdspec"
+        slot3 = "textures/pusfume/inn/psf_body_s"
+        slot4 = "textures/pusfume/inn/cloth_s"
+        slot5 = "textures/pusfume/inn/ammo1_s"
+        slot6 = "textures/pusfume/inn/gunspec"
+        slot7 = "textures/pusfume/inn/armorspec"
+        slot8 = "textures/pusfume/inn/pusfume_eyenormal"
+        slot9 = "textures/pusfume/inn/pusfume_eyenormal"
     }
+
+    emis_colors = {
+		slot8 = "textures/pusfume/inn/pusfume_eyegoggle"
+	}
+	emis_details = {
+		slot1 = "textures/pusfume/inn/blank_emis"
+        slot2 = "textures/pusfume/inn/blank_emis"
+        slot3 = "textures/pusfume/inn/blank_emis"
+        slot4 = "textures/pusfume/inn/blank_emis"
+        slot5 = "textures/pusfume/inn/blank_emis"
+        slot6 = "textures/pusfume/inn/blank_emis"
+        slot7 = "textures/pusfume/inn/blank_emis"
+        slot8 = "textures/pusfume/inn/pusfume_eyegoggle"
+        slot9 = "textures/pusfume/inn/blank_emis"
+        
+	}
 
     color_slot = "texture_map_c0ba2942" 
     norm_slot = "texture_map_59cd86b9"
     MAB_slot = "texture_map_0205ba86"
+    emis_col_slot = "texture_map_71d74d4d"
+	emis_det_slot = "texture_map_ee282ea2"
 
 }
 
@@ -88,15 +100,6 @@ renderables = {
 		viewport_visible = true
 	},
     "p_body" = {
-		always_keep = false
-		culling = "bounding_volume"
-		generate_uv_unwrap = false
-		occluder = false
-		shadow_caster = true
-		surface_queries = false
-		viewport_visible = true
-	},
-    "p_fur" = {
 		always_keep = false
 		culling = "bounding_volume"
 		generate_uv_unwrap = false

@@ -1,0 +1,55 @@
+animation_state_machine = "units/pusfume/pusfume_inn"
+data = {
+    extensions = [
+        "UnitSynchronizationExtension",
+        "GenericUnitInteractableExtension"
+    ]
+    interaction_data = {
+        hud_description = "pusfume"
+        interaction_length = 0
+        interaction_type = "pusfume_interaction"
+        interactor_animation = "interaction_start"
+        interactor_animation_time_variable = "revive_time"
+        only_once = false
+
+    }   
+    
+    
+    mat_slots = {
+        slot1 = "p_fur"
+        slot2 = "p_whiskers"
+    }
+
+    mat_to_use = "units/beings/player/empire_soldier_breton/skins/black_and_gold/mtr_outfit_black_and_gold_3p"
+    mat_package = "units/beings/player/empire_soldier_breton/skins/black_and_gold/chr_empire_soldier_breton_black_and_gold"
+
+    colors = {
+        slot1 = "textures/pusfume/inn/psf_fur_d"
+        slot2 = "textures/pusfume/inn/psf_whiskers_d"  
+    }
+    normals = {
+        slot1 = "textures/pusfume/inn/psf_fur_n"
+        slot2 = "textures/pusfume/inn/psf_whiskers_n"
+    }
+    MABs = { 
+        slot1 = "textures/pusfume/inn/psf_fur_s"
+        // slot2 = "textures/pusfume/inn/psf_whiskers_d"
+    }
+
+    color_slot = "texture_map_64cc5eb8" 
+    norm_slot = "texture_map_861dbfdc"
+    MAB_slot = "texture_map_aeb505ca"
+
+}
+
+renderables = {
+    "p_fur" = {
+		always_keep = false
+		culling = "bounding_volume"
+		generate_uv_unwrap = false
+		occluder = false
+		shadow_caster = true
+		surface_queries = false
+		viewport_visible = true
+	},
+}
