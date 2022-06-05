@@ -1,0 +1,7 @@
+
+events = [
+	"psf_hello"
+	"psf_kruber_03_1"
+	"psf_kruber_03_2"
+	"psf_kruber_04_1"
+]

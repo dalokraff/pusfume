@@ -1,0 +1,173 @@
+
+aux_buses = [
+]
+banks = {
+	asuka = {
+		events = [
+			"ganbare"
+		]
+	}
+	ayaya = {
+		events = [
+			"ayaya"
+		]
+	}
+	Init = {
+		events = [
+		]
+	}
+	pan_hits = {
+		events = [
+			"pan_impact01"
+			"pan_impact02"
+			"pan_impact03"
+			"pan_melee_new01"
+			"pan_melee01"
+			"pan_melee02"
+			"pan_melee03"
+			"pan_melee04"
+			"rand_pan"
+		]
+	}
+	pusfume = {
+		events = [
+			"psf_hello"
+			"psf_kruber_03_1"
+			"psf_kruber_03_2"
+			"psf_kruber_04_1"
+		]
+	}
+}
+buses = [
+	"Master Audio Bus"
+	"Motion Factory Bus"
+]
+events = {
+	ayaya = {
+		attenuation_max = 500
+		duration_max = 56.02066
+		duration_min = 56.02066
+		duration_type = "OneShot"
+		positioning = "3D"
+	}
+	ganbare = {
+		attenuation_max = 500
+		duration_max = 2
+		duration_min = 2
+		duration_type = "OneShot"
+		positioning = "3D"
+	}
+	pan_impact01 = {
+		attenuation_max = 0
+		duration_max = 1.197687
+		duration_min = 1.197687
+		duration_type = "OneShot"
+		positioning = "2D"
+	}
+	pan_impact02 = {
+		attenuation_max = 0
+		duration_max = 1.198413
+		duration_min = 1.198413
+		duration_type = "OneShot"
+		positioning = "2D"
+	}
+	pan_impact03 = {
+		attenuation_max = 0
+		duration_max = 1.198413
+		duration_min = 1.198413
+		duration_type = "OneShot"
+		positioning = "2D"
+	}
+	pan_melee_new01 = {
+		attenuation_max = 500
+		duration_max = 0.679184
+		duration_min = 0.679184
+		duration_type = "OneShot"
+		positioning = "3D"
+	}
+	pan_melee01 = {
+		attenuation_max = 0
+		duration_max = 0.603537
+		duration_min = 0.603537
+		duration_type = "OneShot"
+		positioning = "2D"
+	}
+	pan_melee02 = {
+		attenuation_max = 0
+		duration_max = 0.558367
+		duration_min = 0.558367
+		duration_type = "OneShot"
+		positioning = "2D"
+	}
+	pan_melee03 = {
+		attenuation_max = 0
+		duration_max = 0.620408
+		duration_min = 0.620408
+		duration_type = "OneShot"
+		positioning = "2D"
+	}
+	pan_melee04 = {
+		attenuation_max = 0
+		duration_max = 0.643809
+		duration_min = 0.643809
+		duration_type = "OneShot"
+		positioning = "2D"
+	}
+	psf_hello = {
+		attenuation_max = 0
+		duration_max = 0.738118
+		duration_min = 0.738118
+		duration_type = "OneShot"
+		positioning = "2D"
+	}
+	psf_kruber_03_1 = {
+		attenuation_max = 0
+		duration_max = 5.146327
+		duration_min = 5.146327
+		duration_type = "OneShot"
+		positioning = "2D"
+	}
+	psf_kruber_03_2 = {
+		attenuation_max = 0
+		duration_max = 3.953197
+		duration_min = 3.953197
+		duration_type = "OneShot"
+		positioning = "2D"
+	}
+	psf_kruber_04_1 = {
+		attenuation_max = 0
+		duration_max = 14.34102
+		duration_min = 14.34102
+		duration_type = "OneShot"
+		positioning = "2D"
+	}
+	rand_pan = {
+		attenuation_max = 500
+		duration_max = 56.02066
+		duration_min = 0.679184
+		duration_type = "OneShot"
+		positioning = "3D"
+	}
+}
+parameters = [
+	"Acoustic_Banner"
+	"Anechoic"
+	"Brick"
+	"Carpet"
+	"Concrete"
+	"Cork_Tiles"
+	"Curtains"
+	"Drywall"
+	"Fabric"
+	"Mountain"
+	"Tile"
+	"Wood"
+	"Wood_Bright"
+	"Wood_Deep"
+]
+state_groups = {
+}
+switch_groups = {
+}
+triggers = [
+]
