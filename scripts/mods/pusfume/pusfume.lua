@@ -36,12 +36,11 @@ function mod.update()
         local wwise_world = Wwise.wwise_world(world)
         local char_key = mod.convo_tisch['order'][k]
         mod:echo(char_key)
-        k = k + 1
+        
         if char_key then 
-            local index = mod.convo_tisch[char_key]['current_index']
-            event = mod.convo_tisch[char_key][index]
-            mod.convo_tisch[char_key]['current_index'] = index + 1
+            event = mod.convo_tisch['lines'][k]
         end
+        k = k + 1
 
         local world = Managers.world:world("level_world")
         local wwise_world = Wwise.wwise_world(world)
@@ -62,7 +61,6 @@ function mod.update()
             mod.time = -1
             k = 1
             j = 1
-            mod.convo_tisch[char_key]['current_index'] = 1
         end
     elseif mod.play_dialouge and mod.current_sound then
         local world = Managers.world:world("level_world")
@@ -72,12 +70,11 @@ function mod.update()
             local wwise_world = Wwise.wwise_world(world)
             local char_key = mod.convo_tisch['order'][k]
             mod:echo(char_key)
-            k = k + 1
-            if char_key then 
-                local index = mod.convo_tisch[char_key]['current_index']
-                event = mod.convo_tisch[char_key][index]
-                mod.convo_tisch[char_key]['current_index'] = index + 1
+            
+            if char_key then
+                event = mod.convo_tisch['lines'][k]
             end
+            k = k + 1
 
             local world = Managers.world:world("level_world")
             local wwise_world = Wwise.wwise_world(world)
@@ -96,7 +93,6 @@ function mod.update()
                 mod.time = -1
                 k = 1
                 j = 1
-                mod.convo_tisch[char_key]['current_index'] = 1
             end
         end
     end

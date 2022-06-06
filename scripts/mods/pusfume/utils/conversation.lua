@@ -7,24 +7,22 @@ mod.pusfume_conversations = {
         empire_soldier = {},
         dwarf_ranger = {},
         way_watcher = {},
-        pusfume = {
+        pusfume = {},
+        lines = {
             "psf_hello",
-            current_index = 1,
         },
         order = {
             "pusfume",
         }
     },
     { 
-        empire_soldier = {
+        empire_soldier = {},
+        pusfume = {},
+        lines = {
             "pes_we_backstory_three_01",
-            "pes_we_future_two_03",
-            current_index = 1,
-        },
-        pusfume = {
             "psf_kruber_03_1",
+            "pes_we_future_two_03",
             "psf_kruber_03_2",
-            current_index = 1,
         },
         order = {
             "empire_soldier", 
@@ -33,23 +31,14 @@ mod.pusfume_conversations = {
             "pusfume",
         }
     },
-    -- { 
-    --     empire_soldier = {
-    --         "pes_we_future_two_03",
-    --     },
-    --     pusfume = {
-    --         "psf_kruber_03_2",
-    --     },
-    --     order = {
-    --         "empire_soldier", 
-    --         "pusfume",
-    --     }
-    -- },
     { 
         empire_soldier = {},
         pusfume = {
             "psf_kruber_04_1",
             current_index = 1,
+        },
+        lines = {
+            "psf_kruber_04_1",
         },
         order = {
             "pusfume",
