@@ -37,7 +37,7 @@ end
 
 InteractionDefinitions.pusfume_interaction.server.can_interact = function (interactor_unit, interactable_unit)
 
-    return (Unit.alive(interactable_unit) and Unit.alive(interactor_unit))
+    return (Unit.alive(interactable_unit) and Unit.alive(interactor_unit) and not mod.play_dialouge)
 end
 
 InteractionDefinitions.pusfume_interaction.client.stop = function (world, interactor_unit, interactable_unit, data, config, t, result)

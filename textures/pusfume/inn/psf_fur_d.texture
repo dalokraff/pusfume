@@ -1,6 +1,6 @@
 common = {
   input = {
-    filename = "textures/pusfume/inn/psf_fur_d"
+    filename = "textures/pusfume/inn/psf_fur_d_rein"
 
   }
 

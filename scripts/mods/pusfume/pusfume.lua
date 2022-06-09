@@ -102,16 +102,47 @@ mod:command("spawn_pusfume", "", function()
     local world = Managers.world:world("level_world")
     local player = Managers.player:local_player()
     local player_unit = player.player_unit
-    local position = Unit.local_position(player_unit, 0) 
+    -- local position = Unit.local_position(player_unit, 0)
+    local position = Vector3(25.4691+0.5, 33.7466, 7.013)
+    -- local rotation = Unit.local_rotation(player_unit, 0)
+    -- local rotation = Quaternion.from_elements(0,0,-0.637392,-0.77054)
+    local rotation = Quaternion.from_elements(0,0,-0.77054,0.637392)    
+    local unit_spawner = Managers.state.unit_spawner
+    local unit_template_name = "interaction_unit"
+    local extension_init_data = {}
+    local unit, go_id = unit_spawner:spawn_network_unit("units/pusfume/collision", unit_template_name, extension_init_data, position, rotation)
+    local unit2 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn", position, rotation)
+    local unit3 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn_fur", position, rotation)
+    -- Unit.disable_animation_state_machine(unit3) 
+    
+    World.link_unit(world, unit, Unit.node(unit, "collision"), unit2, Unit.node(unit2, "collision"))
+    mod:echo(position)
+    mod:echo(rotation)
+    -- AttachmentUtils.link(world, unit2, unit3, AttachmentNodeLinking.pusfume)
+end)
+
+
+
+mod:command("spawn_pusfume_by_player", "", function() 
+    local world = Managers.world:world("level_world")
+    local player = Managers.player:local_player()
+    local player_unit = player.player_unit
+    local position = Unit.local_position(player_unit, 0)    
     local rotation = Unit.local_rotation(player_unit, 0)
     local unit_spawner = Managers.state.unit_spawner
     local unit_template_name = "interaction_unit"
     local extension_init_data = {}
-    local unit, go_id = unit_spawner:spawn_network_unit("units/pusfume/pusfume_inn", unit_template_name, extension_init_data, position, rotation)
-    local unit2 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn_fur", position, rotation)
-    Unit.disable_animation_state_machine(unit2)
-    AttachmentUtils.link(world, unit, unit2, AttachmentNodeLinking.pusfume)
+    local unit, go_id = unit_spawner:spawn_network_unit("units/pusfume/collision", unit_template_name, extension_init_data, position, rotation)
+    local unit2 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn", position, rotation)
+    local unit3 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn_fur", position, rotation)
+    -- Unit.disable_animation_state_machine(unit3) 
+    
+    World.link_unit(world, unit, Unit.node(unit, "collision"), unit2, Unit.node(unit2, "collision"))
+    mod:echo(position)
+    mod:echo(rotation)
+    -- AttachmentUtils.link(world, unit2, unit3, AttachmentNodeLinking.pusfume)
 end)
+
 
 mod:command("spawn_pusfume_no_extension", "", function() 
     local world = Managers.world:world("level_world")
@@ -127,3 +158,5 @@ mod:command("spawn_pusfume_no_extension", "", function()
     Unit.disable_animation_state_machine(unit2)
     AttachmentUtils.link(world, unit, unit2, AttachmentNodeLinking.pusfume)
 end)
+
+

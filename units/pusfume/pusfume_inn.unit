@@ -25,6 +25,7 @@ data = {
         slot7 = "p_armor"
         slot8 = "p_eye_g"
         slot9 = "p_eye"
+        slot10 = "psf_wood"
     }
 
     // mat_to_use = "units/weapons/player/wpn_empire_handgun_02_t2/wpn_empire_handgun_02_t2_3p"
@@ -41,6 +42,7 @@ data = {
         slot7 = "textures/pusfume/inn/armortext"
         slot8 = "textures/pusfume/inn/pusfume_eyegoggle"
         slot9 = "textures/pusfume/inn/skaven_eyemask"
+        slot10 = "textures/pusfume/inn/woodgeneric_d"
     }
     normals = {
         slot1 = "textures/pusfume/inn/gl_n"
@@ -52,6 +54,7 @@ data = {
         slot7 = "textures/pusfume/inn/armor_normal"
         slot8 = "textures/pusfume/inn/pusfume_eyenormal"
         slot9 = "textures/pusfume/inn/pusfume_eyenormal"
+        slot10 = "textures/pusfume/inn/woodgeneric_n"
     }
     MABs = {
         slot1 = "textures/pusfume/inn/gl_s"
@@ -63,6 +66,7 @@ data = {
         slot7 = "textures/pusfume/inn/armorspec"
         slot8 = "textures/pusfume/inn/pusfume_eyenormal"
         slot9 = "textures/pusfume/inn/pusfume_eyenormal"
+        slot10 = "textures/default_packed"
     }
 
     emis_colors = {
@@ -78,6 +82,7 @@ data = {
         slot7 = "textures/pusfume/inn/blank_emis"
         slot8 = "textures/pusfume/inn/pusfume_eyegoggle"
         slot9 = "textures/pusfume/inn/blank_emis"
+        slot10 = "textures/pusfume/inn/blank_emis"
         
 	}
 
@@ -126,4 +131,13 @@ renderables = {
 		surface_queries = false
 		viewport_visible = true
 	},
+    // "tablewood" = {
+	// 	always_keep = false
+	// 	culling = "bounding_volume"
+	// 	generate_uv_unwrap = false
+	// 	occluder = false
+	// 	shadow_caster = true
+	// 	surface_queries = false
+	// 	viewport_visible = true
+	// },
 }
