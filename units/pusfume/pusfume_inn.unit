@@ -52,8 +52,8 @@ data = {
         slot5 = "textures/pusfume/inn/ammo1_n"
         slot6 = "textures/pusfume/inn/gunnorm"
         slot7 = "textures/pusfume/inn/armor_normal"
-        slot8 = "textures/pusfume/inn/pusfume_eyenormal"
-        slot9 = "textures/pusfume/inn/pusfume_eyenormal"
+        slot8 = "textures/pusfume/inn/pusfume_eyecolor"
+        slot9 = "textures/pusfume/inn/pusfume_eyecolor"
         slot10 = "textures/pusfume/inn/woodgeneric_n"
     }
     MABs = {
@@ -64,8 +64,8 @@ data = {
         slot5 = "textures/pusfume/inn/ammo1_s"
         slot6 = "textures/pusfume/inn/gunspec"
         slot7 = "textures/pusfume/inn/armorspec"
-        slot8 = "textures/pusfume/inn/pusfume_eyenormal"
-        slot9 = "textures/pusfume/inn/pusfume_eyenormal"
+        slot8 = "textures/pusfume/inn/pusfume_eyecolor"
+        slot9 = "textures/pusfume/inn/pusfume_eyecolor"
         slot10 = "textures/default_packed"
     }
 
