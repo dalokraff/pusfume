@@ -75,7 +75,7 @@ InteractionDefinitions.pusfume_interaction.client.stop = function (world, intera
             for _,char_key in ipairs(mod.convo_tisch) do
                 char_key["current_index"] = 1
             end
-
+            Unit.animation_event(interactable_unit, "interact")
         end
 
 	end

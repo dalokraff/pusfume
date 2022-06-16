@@ -3,7 +3,7 @@ local mod = get_mod("pusfume")
 AttachmentNodeLinking.pusfume = {
     {
         target = 0,
-        source = "root_point",
+        source = 0,
     },
     {
         target = "DEF-shoulder_L",

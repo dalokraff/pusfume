@@ -2,7 +2,8 @@ local mod = get_mod("pusfume")
 
 local pacakge_tisch = {}
 pacakge_tisch["units/pusfume/dummy_pusfume"] = "units/pusfume/dummy_pusfume"
-
+pacakge_tisch["units/pusfume/pusfume_inn"] = "units/pusfume/pusfume_inn"
+pacakge_tisch["units/pusfume/pusfume_inn_fur"] = "units/pusfume/pusfume_inn_fur"
 mod:hook(PackageManager, "load",
          function(func, self, package_name, reference_name, callback,
                   asynchronous, prioritize)

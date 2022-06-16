@@ -38,15 +38,12 @@ layers = [
 					}
 				]
 				weights = [
-					"5.0",
-					"2.0",
-					"2.0",
 					"1.0"
 				]
 			}
 			{
 				animations = [
-					"units/pusfume/anims/pusfume_inn_idle"
+					"units/pusfume/anims/pusfume_startle"
 				]
 				loop_animation = false
 				name = "base/interact"
@@ -54,6 +51,7 @@ layers = [
 				root_driving = "ignore"
 				speed = "1"
 				state_type = "regular"
+				emit = "base/idle"
 				transitions = [
 					{
 						blend_time = 0.2

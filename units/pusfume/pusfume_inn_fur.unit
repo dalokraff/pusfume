@@ -42,6 +42,52 @@ data = {
 
 }
 
+// lod = [
+// 	{
+// 		bounding_volume = "p_fur"
+// 		name = "lod"
+// 		orientation = "p_fur"
+// 		steps = [
+// 			{
+// 				renderables = [
+// 					"p_fur"
+// 				]
+// 				visible_height_range = [
+// 					1
+// 					0.3
+// 				]
+// 			}
+// 			{
+// 				renderables = [
+// 					"p_fur"
+// 				]
+// 				visible_height_range = [
+// 					0.3
+// 					0.2
+// 				]
+// 			}
+// 			{
+// 				renderables = [
+// 					"p_fur"
+// 				]
+// 				visible_height_range = [
+// 					0.2
+// 					0.1
+// 				]
+// 			}
+// 			{
+// 				renderables = [
+// 					"p_fur"
+// 				]
+// 				visible_height_range = [
+// 					0.1
+// 					0.01
+// 				]
+// 			}
+// 		]
+// 	}
+// ]
+
 renderables = {
     "p_fur" = {
 		always_keep = false

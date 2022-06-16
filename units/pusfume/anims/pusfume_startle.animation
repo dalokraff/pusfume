@@ -1,0 +1,9 @@
+bones = "units/pusfume/pusfume_inn"
+tolerance = {
+	"" = [
+		0.01
+		0.01
+		false
+		false
+	]
+}
