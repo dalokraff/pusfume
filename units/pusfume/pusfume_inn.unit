@@ -41,7 +41,7 @@ data = {
         slot6 = "textures/pusfume/inn/gun"
         slot7 = "textures/pusfume/inn/armortext"
         slot8 = "textures/pusfume/inn/pusfume_eyegoggle"
-        slot9 = "textures/pusfume/inn/skaven_eyemask"
+        slot9 = "textures/pusfume/inn/pusfume_eyecolor"
         slot10 = "textures/pusfume/inn/woodgeneric_d"
     }
     normals = {
