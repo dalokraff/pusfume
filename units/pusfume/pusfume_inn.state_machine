@@ -4,6 +4,8 @@ events = {
 	}
 	interact = {
 	}
+	talk_pus = {
+	}
 	ragdoll = {
 	}
 }
@@ -28,6 +30,13 @@ layers = [
 						mode = "direct"
 						on_beat = ""
 						to = "base/interact"
+					}
+					{
+						blend_time = 0.3
+						event = "talk_pus"
+						mode = "direct"
+						on_beat = ""
+						to = "base/talk_pus"
 					}
 					{
 						blend_time = 0.2
@@ -67,6 +76,13 @@ layers = [
 					}
 					{
 						blend_time = 0.2
+						event = "talk_pus"
+						mode = "direct"
+						on_beat = ""
+						to = "base/talk_pus"
+					}
+					{
+						blend_time = 0.2
 						event = "death"
 						mode = "direct"
 						on_beat = ""
@@ -75,6 +91,53 @@ layers = [
 				]
 				weights = [
 					"1.0"
+				]
+				exit_event  = "idle"
+				exit_event_blend = 0.2
+			}
+			{
+				animations = [
+					"units/pusfume/anims/pusfume_talk_1",
+					"units/pusfume/anims/pusfume_talk_2",
+				]
+				loop_animation = false
+				name = "base/talk_pus"
+				root_driving = "ignore"
+				speed = "1"
+				state_type = "regular"
+				transitions = [
+					{
+						blend_time = 0.2
+						event = "idle"
+						mode = "direct"
+						on_beat = ""
+						to = "base/idle"
+					}
+					{
+						blend_time = 0.2
+						event = "interact"
+						mode = "direct"
+						on_beat = ""
+						to = "base/interact"
+					}
+					{
+						blend_time = 0.2
+						event = "talk_pus"
+						mode = "direct"
+						on_beat = ""
+						to = "base/talk_pus"
+					}
+					{
+						blend_time = 0.2
+						event = "death"
+						mode = "direct"
+						on_beat = ""
+						to = "base/death"
+					}
+				]
+				weights = [
+					"1.0",
+					"1.0",
 				]
 				exit_event  = "idle"
 				exit_event_blend = 0.2

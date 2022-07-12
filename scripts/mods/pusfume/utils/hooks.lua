@@ -167,6 +167,20 @@ mod:hook(Unit, "animation_event", function (func, unit, event)
     local player_unit = player.player_unit
     local current_time = os.time()
 
+    if Unit.has_data(unit, "unique_id") then
+        
+        local unique_id = Unit.get_data(unit, "unique_id")
+        -- mod:echo(unique_id)
+        if mod.attached_units[unique_id] then
+            local attached_unit = mod.attached_units[unique_id]["target"]
+            -- mod:echo(attached_unit)
+            if Unit.has_animation_event(attached_unit, event) then
+                return func(attached_unit, event)
+            end
+        end
+    end
+    
+    
     if unit == player_unit then
 
         local player_position = Unit.local_position(player_unit, 0)
@@ -190,5 +204,22 @@ mod:hook(Unit, "animation_event", function (func, unit, event)
 
     return func(unit, event)
 end)
+
+
+-- mod:hook(Unit, "animation_event", function(func, unit, event)
+--     if Unit.has_data(unit, "unique_id") then
+        
+--         local unique_id = Unit.get_data(unit, "unique_id")
+--         -- mod:echo(unique_id)
+--         if mod.attached_units[unique_id] then
+--             local attached_unit = mod.attached_units[unique_id]["target"]
+--             -- mod:echo(attached_unit)
+--             if Unit.has_animation_event(attached_unit, event) then
+--                 return func(attached_unit, event)
+--             end
+--         end
+--     end
+--     return func(unit, event)
+-- end)
 
 -- mod:echo(os.time())

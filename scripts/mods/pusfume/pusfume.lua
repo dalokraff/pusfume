@@ -154,21 +154,7 @@ mod:command("attached_units", "", function()
 
 end)
 
-mod:hook(Unit, "animation_event", function(func, unit, event)
-    if Unit.has_data(unit, "unique_id") then
-        
-        local unique_id = Unit.get_data(unit, "unique_id")
-        -- mod:echo(unique_id)
-        if mod.attached_units[unique_id] then
-            local attached_unit = mod.attached_units[unique_id]["target"]
-            -- mod:echo(attached_unit)
-            if Unit.has_animation_event(attached_unit, event) then
-                return func(attached_unit, event)
-            end
-        end
-    end
-    return func(unit, event)
-end)
+
 
 
 
@@ -212,6 +198,26 @@ ItemMasterList.es_2h_heavy_spear.right_hand_unit = "units/pusfume_weapons/pusfum
 
 Cosmetics.skin_dr_ranger.first_person_attachment.unit = "units/pusfume_1p/pusfume_fp_bod"
 Cosmetics.skin_dr_ranger.first_person_attachment.attachment_node_linking = AttachmentNodeLinking.pusfume_first_person
+
+
+
+
+local world = Managers.world:world("level_world")
+    local player = Managers.player:local_player()
+    local player_unit = player.player_unit
+    -- local position = Unit.local_position(player_unit, 0)
+    local position = Vector3(25.4691+0.5, 33.7466, 7.013)
+    -- local rotation = Unit.local_rotation(player_unit, 0)
+    -- local rotation = Quaternion.from_elements(0,0,-0.637392,-0.77054)
+    local rotation = Quaternion.from_elements(0,0,-0.77054,0.637392)    
+    local unit_spawner = Managers.state.unit_spawner
+    local unit_template_name = "interaction_unit"
+    local extension_init_data = {}
+    local unit2 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn", position, rotation)
+    mod:echo(Unit.has_animation_event(unit2, "talk_pus"))
+
+
+
 
 -- 919688119
 -- 41ddb36a4b2eb12c
