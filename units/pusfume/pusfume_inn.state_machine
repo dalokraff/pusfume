@@ -47,18 +47,15 @@ layers = [
 				]
 				loop_animation = false
 				name = "base/interact"
-				randomization_type = "every_loop"
 				root_driving = "ignore"
 				speed = "1"
 				state_type = "regular"
-				emit = "base/idle"
 				transitions = [
 					{
 						blend_time = 0.2
 						event = "idle"
 						mode = "direct"
-						on_beat = "base/interact"
-						on = "base/interact"
+						on_beat = ""
 						to = "base/idle"
 					}
 					{
@@ -79,6 +76,8 @@ layers = [
 				weights = [
 					"1.0"
 				]
+				exit_event  = "idle"
+				exit_event_blend = 0.2
 			}
 			{
 				name = "base/death"

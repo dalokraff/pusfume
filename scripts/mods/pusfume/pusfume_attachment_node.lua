@@ -594,3 +594,24 @@ AttachmentNodeLinking.pusfume = {
         source = "props_furniture_end",
     },
 }
+
+
+
+AttachmentNodeLinking.pusfume_first_person = {
+    {
+        target = 0,
+        source = "root_point",
+    },
+    -- {
+    --     target = "DEF-spine",
+    --     source = "j_spine2",
+    -- },
+    -- {
+    --     target = "DEF-hand_L",
+    --     source = "j_lefthand",
+    -- },
+    -- {
+    --     target = "DEF-hand_R",
+    --     source = "j_righthand",
+    -- },
+}

@@ -1,9 +1,14 @@
 local mod = get_mod("pusfume")
 
 local pacakge_tisch = {}
+
 pacakge_tisch["units/pusfume/dummy_pusfume"] = "units/pusfume/dummy_pusfume"
 pacakge_tisch["units/pusfume/pusfume_inn"] = "units/pusfume/pusfume_inn"
 pacakge_tisch["units/pusfume/pusfume_inn_fur"] = "units/pusfume/pusfume_inn_fur"
+pacakge_tisch["units/pusfume_weapons/pusfume_fp_spear"] = "units/pusfume_weapons/pusfume_fp_spear"
+pacakge_tisch["units/pusfume_weapons/pusfume_fp_spear_3p"] = "units/pusfume_weapons/pusfume_fp_spear_3p"
+pacakge_tisch["units/pusfume_1p/pusfume_fp_bod"] = "units/pusfume_1p/pusfume_fp_bod"
+
 mod:hook(PackageManager, "load",
          function(func, self, package_name, reference_name, callback,
                   asynchronous, prioritize)
@@ -154,3 +159,36 @@ mod:hook(unit_templates, "extensions_to_remove_on_death", function (func, unit_t
 	return extensions, num_extensions
 end)
 
+-- idle walk move
+
+mod:hook(Unit, "animation_event", function (func, unit, event)
+    local world = Managers.world:world("level_world")
+    local player = Managers.player:local_player()
+    local player_unit = player.player_unit
+    local current_time = os.time()
+
+    if unit == player_unit then
+
+        local player_position = Unit.local_position(player_unit, 0)
+        local pusfume_position = Vector3(-9999,0,0)
+
+        if Unit.alive(mod.pusfume_unit['unit']) then
+            pusfume_position = Unit.local_position(mod.pusfume_unit['unit'], 0)
+            local dif_vec = player_position - pusfume_position 
+            local plane_dist = math.sqrt(math.pow(dif_vec['x'], 2) + math.pow(dif_vec['z'], 2))
+            if plane_dist < 2 then
+                local last_time = Unit.get_data(unit, 'startled_pusfume') or 1
+                if not Unit.get_data(unit, 'startled_pusfume') then
+                    Unit.set_data(unit, 'startled_pusfume', true)
+                    Unit.animation_event(mod.pusfume_unit['unit'], 'interact')
+                end
+            elseif plane_dist > 4 then
+                Unit.set_data(unit, 'startled_pusfume', false)
+            end
+        end
+    end
+
+    return func(unit, event)
+end)
+
+-- mod:echo(os.time())

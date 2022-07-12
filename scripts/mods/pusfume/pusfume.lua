@@ -100,6 +100,7 @@ end
 
 
 mod.attached_units = {}
+mod.pusfume_unit = {}
 
 mod:command("spawn_pusfume", "", function() 
     local world = Managers.world:world("level_world")
@@ -117,6 +118,8 @@ mod:command("spawn_pusfume", "", function()
     local unit2 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn", position, rotation)
     local unit3 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn_fur", position, rotation)
     Unit.disable_animation_state_machine(unit3)
+
+    mod.pusfume_unit['unit'] = unit2
     
     World.link_unit(world, unit, Unit.node(unit, "collision"), unit2, Unit.node(unit2, "collision"))
     -- Unit.set_data(unit, 'attached_unit', Unit.get_data(unit2, 'unit_name'))
@@ -205,9 +208,56 @@ mod:command("spawn_pusfume_no_extension", "", function()
     AttachmentUtils.link(world, unit, unit2, AttachmentNodeLinking.pusfume)
 end)
 
+ItemMasterList.es_2h_heavy_spear.right_hand_unit = "units/pusfume_weapons/pusfume_fp_spear"
+
+Cosmetics.skin_dr_ranger.first_person_attachment.unit = "units/pusfume_1p/pusfume_fp_bod"
+Cosmetics.skin_dr_ranger.first_person_attachment.attachment_node_linking = AttachmentNodeLinking.pusfume_first_person
+
+-- 919688119
+-- 41ddb36a4b2eb12c
+-- mod:echo(0)
+-- local world = Managers.world:world("level_world")
+-- local unit_list = World.units(world)
+-- for _,unit in ipairs(unit_list) do
+--     local id = Unit.name_hash(unit)
+--     print(id)
+--     -- local name = Unit.debug_name(unit)
+--     -- mod:echo(tostring(name).."      "..tostring(id))
+--     -- if tostring(id) == "919688119" then
+--     --     mod:echo(id)
+--     -- end
+-- end
 
 
+-- local world = Managers.world:world("level_world")
+-- local unit_list = World.units(world)
+-- local mod.check = {}
+-- for _,unit in ipairs(unit_list) do
+--     if not mod.check[tostring(unit)] then 
+--         local id = Unit.id32(unit)
+--         local name = Unit.debug_name(unit)
 
+--         local player = Managers.player:local_player()
+--         local player_unit = player.player_unit
+--         local position = Unit.local_position(player_unit, 0) 
+--         local rotation = Unit.local_rotation(player_unit, 0)
+--         local hash = Unit.name_hash(unit)
+        
+--         --creates table that stores the internal numeric ASCII representation
+--         local tisch = {}
+--         local i = 1
+--         while (string.byte(hash,i)) do
+--             local bite = string.byte(hash,i)
+--             tisch[i] = bite
+--             i = i +1
+--         end
+--         --all the hash names should be 8 characters long
+--         -- local unit_stored_hash = string.char(tisch[1], tisch[2], tisch[3], tisch[4], tisch[5], tisch[6], tisch[7], tisch[8])
+
+--         print(tostring(unit)..'     '..tostring(tisch[1])..', '..tostring(tisch[2])..', '..tostring(tisch[3])..', '..tostring(tisch[4])..', '..tostring(tisch[5])..', '..tostring(tisch[6])..', '..tostring(tisch[7])..', '..tostring(tisch[8]))
+--         mod.check[tostring(unit)] = true    
+--     end
+-- end
 
 
 -- local world = Managers.world:world("level_world")
@@ -218,7 +268,7 @@ end)
 -- local unit_spawner = Managers.state.unit_spawner
 -- local unit_template_name = "interaction_unit"
 -- local extension_init_data = {}
--- local unit, go_id = unit_spawner:spawn_network_unit("units/pusfume/collision", unit_template_name, extension_init_data, position, rotation)
+-- local unit, go_id = unit_spawner:spawn_network_unit("units/pusfume_1p/pusfume_fp_bod", unit_template_name, extension_init_data, position, rotation)
 -- local unit2 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn", position, rotation)
 -- local unit3 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn_fur", position, rotation)
 -- Unit.disable_animation_state_machine(unit3)
@@ -326,3 +376,6 @@ end)
 -- 			local absolute_path = absolute_output_base_dir.."/"..relative_output_dir.."/"..sector_name..".navdata"
 -- 			GwNavGeneration.add_navdata_to_world(GLOBAL_AI_NAVWORLD, absolute_path, database_index)
 -- 		end
+
+
+
