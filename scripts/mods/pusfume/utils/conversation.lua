@@ -51,7 +51,7 @@ mod.pusfume_conversations = {
             "psf_kr_01_1",
 			"pes_woods_conversation_seven_02",
 			"psf_kr_01_2",
-			"pes_cog_coversation_twentysix_02",
+			"pes_cog_conversation_twentysix_02",
 			"psf_kr_01_3",
         },
         order = {
