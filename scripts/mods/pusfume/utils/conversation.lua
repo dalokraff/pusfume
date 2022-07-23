@@ -44,6 +44,39 @@ mod.pusfume_conversations = {
             "pusfume",
         }
     },
+    {  
+        empire_soldier = {},
+        pusfume = {},
+        lines = {
+            "psf_kr_01_1",
+			"pes_woods_conversation_seven_02",
+			"psf_kr_01_2",
+			"pes_cog_coversation_twentysix_02",
+			"psf_kr_01_3",
+        },
+        order = {
+            "pusfume",
+            "empire_soldier",
+            "pusfume",
+            "empire_soldier",
+            "pusfume",
+        }
+    },
+    {  
+        empire_soldier = {},
+        pusfume = {},
+        lines = {
+            "psf_kr_02_1",
+			"pes_wh_future_one_03",
+			"psf_kr_02_2",
+        },
+        order = {
+            "pusfume",
+            "empire_soldier",
+            "pusfume",
+        }
+    },
+    
 }
 
 

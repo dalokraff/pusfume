@@ -32,6 +32,11 @@ banks = {
 	pusfume = {
 		events = [
 			"psf_hello"
+			"psf_kr_01_1"
+			"psf_kr_01_2"
+			"psf_kr_01_3"
+			"psf_kr_02_1"
+			"psf_kr_02_2"
 			"psf_kruber_03_1"
 			"psf_kruber_03_2"
 			"psf_kruber_04_1"
@@ -41,6 +46,9 @@ banks = {
 buses = [
 	"Master Audio Bus"
 	"Motion Factory Bus"
+	"MUSIC"
+	"SFX"
+	"VO"
 ]
 events = {
 	ayaya = {
@@ -114,32 +122,67 @@ events = {
 		positioning = "2D"
 	}
 	psf_hello = {
-		attenuation_max = 0
+		attenuation_max = 100
 		duration_max = 0.738118
 		duration_min = 0.738118
 		duration_type = "OneShot"
-		positioning = "2D"
+		positioning = "3D"
+	}
+	psf_kr_01_1 = {
+		attenuation_max = 100
+		duration_max = 10.22154
+		duration_min = 10.22154
+		duration_type = "OneShot"
+		positioning = "3D"
+	}
+	psf_kr_01_2 = {
+		attenuation_max = 100
+		duration_max = 16.57905
+		duration_min = 16.57905
+		duration_type = "OneShot"
+		positioning = "3D"
+	}
+	psf_kr_01_3 = {
+		attenuation_max = 100
+		duration_max = 5.739592
+		duration_min = 5.739592
+		duration_type = "OneShot"
+		positioning = "3D"
+	}
+	psf_kr_02_1 = {
+		attenuation_max = 100
+		duration_max = 10.1393
+		duration_min = 10.1393
+		duration_type = "OneShot"
+		positioning = "3D"
+	}
+	psf_kr_02_2 = {
+		attenuation_max = 100
+		duration_max = 10.92161
+		duration_min = 10.92161
+		duration_type = "OneShot"
+		positioning = "3D"
 	}
 	psf_kruber_03_1 = {
-		attenuation_max = 0
+		attenuation_max = 100
 		duration_max = 5.146327
 		duration_min = 5.146327
 		duration_type = "OneShot"
-		positioning = "2D"
+		positioning = "3D"
 	}
 	psf_kruber_03_2 = {
-		attenuation_max = 0
+		attenuation_max = 100
 		duration_max = 3.953197
 		duration_min = 3.953197
 		duration_type = "OneShot"
-		positioning = "2D"
+		positioning = "3D"
 	}
 	psf_kruber_04_1 = {
-		attenuation_max = 0
+		attenuation_max = 100
 		duration_max = 14.34102
 		duration_min = 14.34102
 		duration_type = "OneShot"
-		positioning = "2D"
+		positioning = "3D"
 	}
 	rand_pan = {
 		attenuation_max = 500
