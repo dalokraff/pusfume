@@ -204,12 +204,12 @@ mod.pusfume_conversations = {
         witch_hunter = {},
         pusfume = {},
         lines = {
-            "psf_saltz_01_1",
 			"pwh_cog_conversation_twentytwo_01",
+            "psf_saltz_01_1",
         },
         order = {
-            "pusfume",
             "witch_hunter",
+            "pusfume",
         }
     },
     {  
