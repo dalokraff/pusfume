@@ -223,3 +223,12 @@ end)
 -- end)
 
 -- mod:echo(os.time())
+
+--bypasses the local error function, removing the "<>" for this mod's localized text
+mod:hook(LocalizationManager, "_base_lookup", function (func, self, text_id)
+    if not string.find(mod:localize(text_id), "<") then
+        return mod:localize(text_id)
+    end
+
+	return func(self, text_id)
+end)
