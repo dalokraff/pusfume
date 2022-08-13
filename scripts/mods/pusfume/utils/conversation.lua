@@ -83,7 +83,7 @@ mod.pusfume_conversations = {
             "psf_b_01_1",
 			"pdr_cog_conversation_two_01",
 			"psf_b_01_2",
-            "pdr_dr_future_fivec_03",
+            "pdr_dr_future_five_03",
             "psf_b_01_3",
         },
         order = {
