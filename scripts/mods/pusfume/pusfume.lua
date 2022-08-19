@@ -1,7 +1,9 @@
 local mod = get_mod("pusfume")
-mod:dofile("scripts/mods/pusfume/utils/network_tables")
-mod:dofile("scripts/mods/pusfume/utils/hooks")
+mod:dofile("scripts/mods/pusfume/utils/mod_rpcs")
 mod:dofile("scripts/mods/pusfume/utils/conversation")
+mod:dofile("scripts/mods/pusfume/utils/network_tables") --this must be done after conversations
+mod:dofile("scripts/mods/pusfume/utils/hooks")
+
 mod:dofile("scripts/mods/pusfume/utils/interaction")
 mod:dofile("scripts/mods/pusfume/pusfume_attachment_node")
 -- Your mod code goes here.
@@ -9,9 +11,12 @@ mod:dofile("scripts/mods/pusfume/pusfume_attachment_node")
 
 Wwise.load_bank("wwise/pusfume")
 
+mod.refreshed_convos = table.clone(mod.pusfume_conversations)
+mod.previous_convos = {}
 mod.player_list = nil
 mod.current_sound = nil
 mod.time = -1
+math.randomseed(1)
 local i = 0
 
 local function find_interactor_convo(interactor, character, convo_table)
@@ -52,8 +57,13 @@ function mod.update()
                 unit = mod.interaction_units["interactor_unit"]
             end
             mod:echo(unit)
-            local sound = WwiseWorld.trigger_event(wwise_world, event, unit)
-            mod.current_sound = sound
+            local sound_event_id = NetworkLookup.sound_events[event]
+            local unit_storage = Managers.state.unit_storage
+            local unit_marker = unit_storage:go_id(unit)
+            if Unit.has_data(unit, "unit_marker") then
+                unit_marker = Unit.get_data(unit, "unit_marker")
+            end
+            mod:network_send("rpc_send_pusfume_sound","all", unit_marker, sound_event_id)
             mod.time = os.time()
         else 
             mod.play_dialouge = false
@@ -85,8 +95,13 @@ function mod.update()
                 else 
                     unit = mod.interaction_units["interactor_unit"]
                 end
-                local sound = WwiseWorld.trigger_event(wwise_world, event, unit)
-                mod.current_sound = sound
+                local sound_event_id = NetworkLookup.sound_events[event]
+                local unit_storage = Managers.state.unit_storage
+                local unit_marker = unit_storage:go_id(unit)
+                if Unit.has_data(unit, "unit_marker") then
+                    unit_marker = Unit.get_data(unit, "unit_marker")
+                end
+                mod:network_send("rpc_send_pusfume_sound","all", unit_marker, sound_event_id)
                 mod.time = os.time()
             else 
                 mod.play_dialouge = false
@@ -103,33 +118,8 @@ mod.attached_units = {}
 mod.pusfume_unit = {}
 
 mod:command("spawn_pusfume", "", function() 
-    local world = Managers.world:world("level_world")
-    local player = Managers.player:local_player()
-    local player_unit = player.player_unit
-    -- local position = Unit.local_position(player_unit, 0)
-    local position = Vector3(25.4691+0.5, 33.7466, 7.013)
-    -- local rotation = Unit.local_rotation(player_unit, 0)
-    -- local rotation = Quaternion.from_elements(0,0,-0.637392,-0.77054)
-    local rotation = Quaternion.from_elements(0,0,-0.77054,0.637392)    
-    local unit_spawner = Managers.state.unit_spawner
-    local unit_template_name = "interaction_unit"
-    local extension_init_data = {}
-    local unit, go_id = unit_spawner:spawn_network_unit("units/pusfume/collision", unit_template_name, extension_init_data, position, rotation)
-    local unit2 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn", position, rotation)
-    local unit3 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn_fur", position, rotation)
-    Unit.disable_animation_state_machine(unit3)
-
-    mod.pusfume_unit['unit'] = unit2
-    
-    World.link_unit(world, unit, Unit.node(unit, "collision"), unit2, Unit.node(unit2, "collision"))
-    -- Unit.set_data(unit, 'attached_unit', Unit.get_data(unit2, 'unit_name'))
-    mod.attached_units[Unit.get_data(unit, "unique_id")] = {
-        source = unit,
-        target = unit2, 
-    }
-    mod:echo(position)
-    mod:echo(rotation)
-    AttachmentUtils.link(world, unit2, unit3, AttachmentNodeLinking.pusfume)
+    local unit_marker = math.random(10000)
+    mod:network_send("rpc_request_pusfume_inn","all", unit_marker)
 end)
 
 mod:command("attached_units", "", function() 
@@ -198,190 +188,6 @@ ItemMasterList.es_2h_heavy_spear.right_hand_unit = "units/pusfume_weapons/pusfum
 
 Cosmetics.skin_dr_ranger.first_person_attachment.unit = "units/pusfume_1p/pusfume_fp_bod"
 Cosmetics.skin_dr_ranger.first_person_attachment.attachment_node_linking = AttachmentNodeLinking.pusfume_first_person
-
-
-
-
-local world = Managers.world:world("level_world")
-    local player = Managers.player:local_player()
-    local player_unit = player.player_unit
-    -- local position = Unit.local_position(player_unit, 0)
-    local position = Vector3(25.4691+0.5, 33.7466, 7.013)
-    -- local rotation = Unit.local_rotation(player_unit, 0)
-    -- local rotation = Quaternion.from_elements(0,0,-0.637392,-0.77054)
-    local rotation = Quaternion.from_elements(0,0,-0.77054,0.637392)    
-    local unit_spawner = Managers.state.unit_spawner
-    local unit_template_name = "interaction_unit"
-    local extension_init_data = {}
-    local unit2 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn", position, rotation)
-    mod:echo(Unit.has_animation_event(unit2, "talk_pus"))
-
-
-
-
--- 919688119
--- 41ddb36a4b2eb12c
--- mod:echo(0)
--- local world = Managers.world:world("level_world")
--- local unit_list = World.units(world)
--- for _,unit in ipairs(unit_list) do
---     local id = Unit.name_hash(unit)
---     print(id)
---     -- local name = Unit.debug_name(unit)
---     -- mod:echo(tostring(name).."      "..tostring(id))
---     -- if tostring(id) == "919688119" then
---     --     mod:echo(id)
---     -- end
--- end
-
-
--- local world = Managers.world:world("level_world")
--- local unit_list = World.units(world)
--- local mod.check = {}
--- for _,unit in ipairs(unit_list) do
---     if not mod.check[tostring(unit)] then 
---         local id = Unit.id32(unit)
---         local name = Unit.debug_name(unit)
-
---         local player = Managers.player:local_player()
---         local player_unit = player.player_unit
---         local position = Unit.local_position(player_unit, 0) 
---         local rotation = Unit.local_rotation(player_unit, 0)
---         local hash = Unit.name_hash(unit)
-        
---         --creates table that stores the internal numeric ASCII representation
---         local tisch = {}
---         local i = 1
---         while (string.byte(hash,i)) do
---             local bite = string.byte(hash,i)
---             tisch[i] = bite
---             i = i +1
---         end
---         --all the hash names should be 8 characters long
---         -- local unit_stored_hash = string.char(tisch[1], tisch[2], tisch[3], tisch[4], tisch[5], tisch[6], tisch[7], tisch[8])
-
---         print(tostring(unit)..'     '..tostring(tisch[1])..', '..tostring(tisch[2])..', '..tostring(tisch[3])..', '..tostring(tisch[4])..', '..tostring(tisch[5])..', '..tostring(tisch[6])..', '..tostring(tisch[7])..', '..tostring(tisch[8]))
---         mod.check[tostring(unit)] = true    
---     end
--- end
-
-
--- local world = Managers.world:world("level_world")
--- local player = Managers.player:local_player()
--- local player_unit = player.player_unit
--- local position = Unit.local_position(player_unit, 0)
--- local rotation = Unit.local_rotation(player_unit, 0) 
--- local unit_spawner = Managers.state.unit_spawner
--- local unit_template_name = "interaction_unit"
--- local extension_init_data = {}
--- local unit, go_id = unit_spawner:spawn_network_unit("units/pusfume_1p/pusfume_fp_bod", unit_template_name, extension_init_data, position, rotation)
--- local unit2 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn", position, rotation)
--- local unit3 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn_fur", position, rotation)
--- Unit.disable_animation_state_machine(unit3)
--- World.link_unit(world, unit, Unit.node(unit, "collision"), unit2, Unit.node(unit2, "collision"))
--- AttachmentUtils.link(world, unit2, unit3, AttachmentNodeLinking.pusfume)
--- for k,v in pairs(SteamVoipClient) do 
---     mod:echo(k)
---     mod:echo(v)
--- end
-
--- for k,v in pairs(SteamVoipClient['__index']) do 
---     mod:echo(k)
---     mod:echo(v)
--- end
--- mod:echo(SteamVoipClient.audio_level(SteamVoipClient))
-
--- AttachmentNodeLinking.pusfume_third_person = {
---     {
---         target = 0,
---         source = "root_point",
---     }
--- }
-
--- Cosmetics.skin_dr_ironbreaker_black_and_gold.third_person_attachment.unit = "units/pusfume/pusfume_inn"
--- Cosmetics.skin_dr_ironbreaker_black_and_gold.third_person_attachment.attachment_node_linking = AttachmentNodeLinking.pusfume_third_person
-
--- mod:echo(Weapons.speed_boost_potion.left_hand_unit = "units/weapons/player/wpn_potion_buff/wpn_potion_buff")
-
--- local unit_path = "units/weapons/player/wpn_potion_buff/wpn_potion_buff_3p"
--- local num_husk = #NetworkLookup.husks
-
--- NetworkLookup.husks[num_husk +1] = unit_path
--- NetworkLookup.husks[unit_path] = num_husk +1
--- Pickups.potions.speed_boost_potion.unit_name = unit_path
-
--- ItemMasterList.potion_speed_boost_01.left_hand_unit = "units/weapons/player/wpn_potion_buff/wpn_potion_buff"
-
--- local world = Managers.world:world("level_world")
--- local player = Managers.player:local_player()
--- local player_unit = player.player_unit
--- local position = Unit.local_position(player_unit, 0) + Vector3(0,0,1)
--- local rotation = Unit.local_rotation(player_unit, 0)
--- local unit_spawner = Managers.state.unit_spawner
--- local unit_template_name = "interaction_unit"
--- local extension_init_data = {}
--- local unit, go_id = unit_spawner:spawn_local_unit("units/weapons/player/wpn_potion_buff/wpn_potion_buff_3p", position, rotation)
-
--- local world = Managers.world:world("level_world")
--- local player = Managers.player:local_player()
--- local player_unit = player.player_unit
--- local position = Unit.local_position(player_unit, 0) + Vector3(0,0,1)
--- local rotation = Unit.local_rotation(player_unit, 0) 
--- local unit_spawner = Managers.state.unit_spawner
--- local unit_template_name = "interaction_unit"
--- local extension_init_data = {}
--- local unit, go_id = unit_spawner:spawn_local_unit("units/architecture/town/town_walkway_02", position, rotation)
-
--- local nav_gen = GwNavGeneration.create(world)
--- -- GwNavGeneration.enable_write_files(nav_gen, true)
--- 		-- for _, unit in pairs(World.units_by_resource(world, "core/gwnav/units/seedpoint/seedpoint")) do
--- 		-- 	GwNavGeneration.push_seed_point(nav_gen, Unit.local_position(unit, 0))
--- 		-- end
--- 		-- if not Unit.alive(unit) then goto continue end
--- 		-- if (
--- 		-- 	Unit.has_data(unit, "gwnavseedpoint") or
--- 		-- 	Unit.has_data(unit, "GwNavBoxObstacle") or
--- 		-- 	Unit.has_data(unit, "GwNavCylinderObstacle") or
--- 		-- 	Unit.has_data(unit, "GwNavTagBox")
--- 		-- ) then goto continue end
--- 		-- if Unit.get_data(unit, "gwnavgenexcluded") then goto continue end
--- 		-- for i=0, Unit.num_actors(unit)-1 do
--- 		-- 	local actor = Unit.actor(unit, i)
--- 		-- 	if actor and not Actor.is_static(actor) then
--- 		-- 		goto continue
--- 		-- 	end
--- 		-- end
-
--- 		GwNavGeneration.push_meshes_fromunit(nav_gen, unit, true, false) -- consume_physics_mesh, consume_render_mesh
--- 		::continue::
-		
--- 		local absolute_output_base_dir = "D:\\navmesh"
--- 		local relative_output_dir = "level01"
--- 		local sector_name = "sector01"
--- 		local database_index = 1
--- 		-- Generation.
--- 		local ok = GwNavGeneration.generate(nav_gen,
--- 			absolute_output_base_dir,
--- 			relative_output_dir,
--- 			sector_name,
--- 			database_index,
--- 			0.38, -- entity_radius
--- 			1.6, -- entity_height
--- 			60, -- slope_max
--- 			0.5, -- step_max
--- 			0.5, -- min_navigable_surface
--- 			0.5, -- altitude_tolerance
--- 			0.1, -- raster_precision
--- 			0.31, -- cell_size
--- 			1, -- height_field_sampling
--- 			false -- consume_terrain
--- 		)
--- 		--print("Generate result", ok)
--- 		mod:echo(ok)
--- 		if ok then
--- 			local absolute_path = absolute_output_base_dir.."/"..relative_output_dir.."/"..sector_name..".navdata"
--- 			GwNavGeneration.add_navdata_to_world(GLOBAL_AI_NAVWORLD, absolute_path, database_index)
--- 		end
 
 
 

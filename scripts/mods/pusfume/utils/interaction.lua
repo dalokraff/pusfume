@@ -1,13 +1,46 @@
 local mod = get_mod("pusfume")
 
+
+
 local function find_interactor_convo(interactor, character, convo_table)
     local convo = nil
+    local convo_list = convo_table
+
+    -- for index,convo in pairs(mod.previous_convos) do 
+    --     mod:echo(index)
+    --     convo_list[index] = nil
+    --     --need to re-index the table after removing the index
+    -- end
+
+    -- if not convo_list then 
+    --     mod:echo('convo_list')
+    --     convo_table = table.clone(mod.refreshed_convos)
+    --     local convo_list = convo_table
+    --     for i,v in pairs(mod.previous_convos) do 
+    --         mod.previous_convos[i] = nil
+    --     end
+    -- end
+
     if string.find(interactor, character) then 
-        convo = convo_table[math.random(1, #convo_table)]
-        while (not convo[character]) do
-            convo = convo_table[math.random(1, #convo_table)]
+        local index = math.random(1, #convo_list)
+        convo = convo_list[index]
+        local loop_val = convo
+        while (not loop_val[character]) do
+            index = math.random(1, #convo_list)
+            convo = convo_list[index]
+            -- if mod.previous_convos[convo] then 
+            --     loop_val = nil
+            --     mod.previous_convos[convo] = nil
+            -- end
+            -- while (not mod.previous_convos[convo]) do 
+            --     convo = convo_table[math.random(1, #convo_table)]
+            -- end
+            loop_val = convo
         end
+        mod.previous_convos[index] = convo
+        
     end
+    
     return convo
 end
 
@@ -75,7 +108,10 @@ InteractionDefinitions.pusfume_interaction.client.stop = function (world, intera
             for _,char_key in ipairs(mod.convo_tisch) do
                 char_key["current_index"] = 1
             end
-            Unit.animation_event(interactable_unit, "talk_pus")
+            local unit_marker = Unit.get_data(interactable_unit, "unit_marker")
+            local anim_id = NetworkLookup.anims["talk_pus"]
+            mod:network_send("rpc_send_pusfume_anim","all", unit_marker, anim_id)
+            -- Unit.animation_event(interactable_unit, "talk_pus")
         end
 
 	end

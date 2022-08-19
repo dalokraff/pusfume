@@ -167,12 +167,12 @@ mod:hook(Unit, "animation_event", function (func, unit, event)
     local player_unit = player.player_unit
     local current_time = os.time()
 
-    if Unit.has_data(unit, "unique_id") then
+    if Unit.has_data(unit, "unit_marker") then
         
-        local unique_id = Unit.get_data(unit, "unique_id")
+        local unit_marker = Unit.get_data(unit, "unit_marker")
         -- mod:echo(unique_id)
-        if mod.attached_units[unique_id] then
-            local attached_unit = mod.attached_units[unique_id]["target"]
+        if mod.attached_units[unit_marker] then
+            local attached_unit = mod.attached_units[unit_marker]["target"]
             -- mod:echo(attached_unit)
             if Unit.has_animation_event(attached_unit, event) then
                 return func(attached_unit, event)
@@ -194,7 +194,10 @@ mod:hook(Unit, "animation_event", function (func, unit, event)
                 local last_time = Unit.get_data(unit, 'startled_pusfume') or 1
                 if not Unit.get_data(unit, 'startled_pusfume') then
                     Unit.set_data(unit, 'startled_pusfume', true)
-                    Unit.animation_event(mod.pusfume_unit['unit'], 'interact')
+                    local unit_marker = Unit.get_data(mod.pusfume_unit['unit'], "unit_marker")
+                    local anim_id = NetworkLookup.anims["interact"]
+                    mod:network_send("rpc_send_pusfume_anim","all", unit_marker, anim_id)
+                    -- Unit.animation_event(mod.pusfume_unit['unit'], 'interact')
                 end
             elseif plane_dist > 4 then
                 Unit.set_data(unit, 'startled_pusfume', false)
