@@ -36,9 +36,10 @@ function mod.update()
     mod.interactable_unit = interactable_unit
     mod.interactor_unit = interactor_unit
     local event = nil
+    local world = Managers.world:world("level_world")
+    local wwise_world = Wwise.wwise_world(world)
     if mod.play_dialouge and not mod.current_sound then
-        local world = Managers.world:world("level_world")
-        local wwise_world = Wwise.wwise_world(world)
+       
         local char_key = mod.convo_tisch['order'][k]
         mod:echo(char_key)
         
@@ -47,8 +48,6 @@ function mod.update()
         end
         k = k + 1
 
-        local world = Managers.world:world("level_world")
-        local wwise_world = Wwise.wwise_world(world)
         if event then 
             local unit = nil
             if char_key == 'pusfume' then
@@ -73,11 +72,7 @@ function mod.update()
             j = 1
         end
     elseif mod.play_dialouge and mod.current_sound then
-        local world = Managers.world:world("level_world")
-        local wwise_world = Wwise.wwise_world(world)
         if not WwiseWorld.is_playing(wwise_world, mod.current_sound) then
-            local world = Managers.world:world("level_world")
-            local wwise_world = Wwise.wwise_world(world)
             local char_key = mod.convo_tisch['order'][k]
             mod:echo(char_key)
             
@@ -86,8 +81,6 @@ function mod.update()
             end
             k = k + 1
 
-            local world = Managers.world:world("level_world")
-            local wwise_world = Wwise.wwise_world(world)
             if event then 
                 local unit = nil
                 if char_key == 'pusfume' then
