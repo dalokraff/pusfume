@@ -1,0 +1,191 @@
+
+events = {
+	idle_spear = {
+	}
+	block_spear = {
+	}
+	attack_1_spear = {
+	}
+	ragdoll = {
+	}
+}
+layers = [
+	{
+		default_state = "base/idle_spear"
+		states = [
+			{
+				animations = [
+					"units/pusfume_1p/anims/pusfume_sp_idle",
+				]
+				loop_animation = true
+				name = "base/idle_spear"
+				randomization_type = "every_loop"
+				root_driving = "ignore"
+				speed = "1"
+				state_type = "regular"
+				transitions = [
+					{
+						blend_time = 0.2
+						event = "idle_spear"
+						mode = "direct"
+						on_beat = ""
+						to = "base/idle_spear"
+					}
+					{
+						blend_time = 0.2
+						event = "attack_1_spear"
+						mode = "direct"
+						on_beat = ""
+						to = "base/attack_1_spear"
+					}
+					{
+						blend_time = 0.3
+						event = "block_spear"
+						mode = "direct"
+						on_beat = ""
+						to = "base/block_spear"
+					}
+					{
+						blend_time = 0.2
+						event = "death"
+						mode = "direct"
+						on_beat = ""
+						to = "base/death"
+					}
+				]
+				weights = [
+					"1.0"
+				]
+			}
+			{
+				animations = [
+					"units/pusfume_1p/anims/pusfume_sp_at1",
+				]
+				loop_animation = false
+				name = "base/attack_1_spear"
+				root_driving = "ignore"
+				speed = "1"
+				state_type = "regular"
+				transitions = [
+					{
+						blend_time = 0.2
+						event = "idle_spear"
+						mode = "direct"
+						on_beat = ""
+						to = "base/idle_spear"
+					}
+					{
+						blend_time = 0.2
+						event = "attack_1_spear"
+						mode = "direct"
+						on_beat = ""
+						to = "base/attack_1_spear"
+					}
+					{
+						blend_time = 0.3
+						event = "block_spear"
+						mode = "direct"
+						on_beat = ""
+						to = "base/block_spear"
+					}
+					{
+						blend_time = 0.2
+						event = "death"
+						mode = "direct"
+						on_beat = ""
+						to = "base/death"
+					}
+				]
+				weights = [
+					"1.0"
+				]
+				exit_event  = "idle"
+				exit_event_blend = 0.2
+			}
+			{
+				animations = [
+					"units/pusfume_1p/anims/pusfume_sp_block",
+				]
+				loop_animation = true
+				name = "base/block_spear"
+				root_driving = "ignore"
+				speed = "1"
+				state_type = "regular"
+				transitions = [
+					{
+						blend_time = 0.2
+						event = "idle_spear"
+						mode = "direct"
+						on_beat = ""
+						to = "base/idle_spear"
+					}
+					{
+						blend_time = 0.2
+						event = "attack_1_spear"
+						mode = "direct"
+						on_beat = ""
+						to = "base/attack_1_spear"
+					}
+					{
+						blend_time = 0.3
+						event = "block_spear"
+						mode = "direct"
+						on_beat = ""
+						to = "base/block_spear"
+					}
+					{
+						blend_time = 0.2
+						event = "death"
+						mode = "direct"
+						on_beat = ""
+						to = "base/death"
+					}
+				]
+				weights = [
+					"1.0",
+				]
+				exit_event  = "idle"
+				exit_event_blend = 0.2
+			}
+			{
+				name = "base/death"
+				ragdoll = "ragdoll"
+				state_type = "ragdoll"
+				transitions = [
+					{
+						blend_time = 0.2
+						event = "idle_spear"
+						mode = "direct"
+						on_beat = ""
+						to = "base/idle_spear"
+					}
+					{
+						blend_time = 0.2
+						event = "death"
+						mode = "direct"
+						on_beat = ""
+						to = "base/death"
+					}
+					{
+						blend_time = 0.2
+						event = "ragdoll"
+						mode = "direct"
+						on_beat = ""
+						to = "base/death"
+					}
+				]
+			}
+		]
+	}
+]
+ragdolls = {
+	ragdoll = {
+		actors = [
+		]
+		keyframed = [
+		]
+	}
+}
+variables = {
+	move_speed = 1
+}

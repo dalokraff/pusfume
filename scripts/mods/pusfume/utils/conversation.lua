@@ -282,11 +282,3 @@ mod.pusfume_conversations = {
     },
     
 }
-
-
--- local world = Managers.world:world("level_world")
--- local wwise_world = Wwise.wwise_world(world)
--- local event = "pes_we_future_two_03"
--- local sound = WwiseWorld.trigger_event(wwise_world, event)
-
--- mod:echo(WwiseWorld.is_playing(wwise_world, sound))

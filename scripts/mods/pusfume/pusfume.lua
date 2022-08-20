@@ -33,61 +33,32 @@ end
 local k = 1
 local j = 1
 function mod.update()
-    mod.interactable_unit = interactable_unit
-    mod.interactor_unit = interactor_unit
-    local event = nil
-    local world = Managers.world:world("level_world")
-    local wwise_world = Wwise.wwise_world(world)
-    if mod.play_dialouge and not mod.current_sound then
-       
-        local char_key = mod.convo_tisch['order'][k]
-        mod:echo(char_key)
+    if Managers.world:has_world("level_world") then
+        mod.interactable_unit = interactable_unit
+        mod.interactor_unit = interactor_unit
+        local event = nil
+        local world = Managers.world:world("level_world")
+        local wwise_world = Wwise.wwise_world(world)
+        if mod.play_dialouge and not mod.current_sound then
         
-        if char_key then 
-            event = mod.convo_tisch['lines'][k]
-        end
-        k = k + 1
-
-        if event then 
-            local unit = nil
-            if char_key == 'pusfume' then
-                unit = mod.interaction_units["interactable_unit"]
-            else 
-                unit = mod.interaction_units["interactor_unit"]
-            end
-            mod:echo(unit)
-            local sound_event_id = NetworkLookup.sound_events[event]
-            local unit_storage = Managers.state.unit_storage
-            local unit_marker = unit_storage:go_id(unit)
-            if Unit.has_data(unit, "unit_marker") then
-                unit_marker = Unit.get_data(unit, "unit_marker")
-            end
-            mod:network_send("rpc_send_pusfume_sound","all", unit_marker, sound_event_id)
-            mod.time = os.time()
-        else 
-            mod.play_dialouge = false
-            mod.current_sound = nil
-            mod.time = -1
-            k = 1
-            j = 1
-        end
-    elseif mod.play_dialouge and mod.current_sound then
-        if not WwiseWorld.is_playing(wwise_world, mod.current_sound) then
             local char_key = mod.convo_tisch['order'][k]
             mod:echo(char_key)
             
-            if char_key then
+            if char_key then 
                 event = mod.convo_tisch['lines'][k]
             end
             k = k + 1
 
             if event then 
                 local unit = nil
-                if char_key == 'pusfume' then
+                if char_key == 'pusfume' and Unit.alive(mod.interaction_units["interactable_unit"]) and Unit.alive(mod.interaction_units["interactor_unit"]) then
                     unit = mod.interaction_units["interactable_unit"]
-                else 
+                elseif Unit.alive(mod.interaction_units["interactor_unit"]) then
                     unit = mod.interaction_units["interactor_unit"]
+                else
+                    goto unit_dead
                 end
+                mod:echo(unit)
                 local sound_event_id = NetworkLookup.sound_events[event]
                 local unit_storage = Managers.state.unit_storage
                 local unit_marker = unit_storage:go_id(unit)
@@ -98,11 +69,47 @@ function mod.update()
                 mod.time = os.time()
             else 
                 mod.play_dialouge = false
+                mod.current_sound = nil
                 mod.time = -1
                 k = 1
                 j = 1
             end
+        elseif mod.play_dialouge and mod.current_sound then
+            if not WwiseWorld.is_playing(wwise_world, mod.current_sound) then
+                local char_key = mod.convo_tisch['order'][k]
+                mod:echo(char_key)
+                
+                if char_key then
+                    event = mod.convo_tisch['lines'][k]
+                end
+                k = k + 1
+
+                if event then 
+                    local unit = nil
+                    if char_key == 'pusfume' and Unit.alive(mod.interaction_units["interactable_unit"]) and Unit.alive(mod.interaction_units["interactor_unit"]) then
+                        unit = mod.interaction_units["interactable_unit"]
+                    elseif Unit.alive(mod.interaction_units["interactor_unit"]) then
+                        unit = mod.interaction_units["interactor_unit"]
+                    else
+                        goto unit_dead
+                    end
+                    local sound_event_id = NetworkLookup.sound_events[event]
+                    local unit_storage = Managers.state.unit_storage
+                    local unit_marker = unit_storage:go_id(unit)
+                    if Unit.has_data(unit, "unit_marker") then
+                        unit_marker = Unit.get_data(unit, "unit_marker")
+                    end
+                    mod:network_send("rpc_send_pusfume_sound","all", unit_marker, sound_event_id)
+                    mod.time = os.time()
+                else 
+                    mod.play_dialouge = false
+                    mod.time = -1
+                    k = 1
+                    j = 1
+                end
+            end
         end
+        ::unit_dead::
     end
 end
 
@@ -177,10 +184,30 @@ mod:command("spawn_pusfume_no_extension", "", function()
     AttachmentUtils.link(world, unit, unit2, AttachmentNodeLinking.pusfume)
 end)
 
-ItemMasterList.es_2h_heavy_spear.right_hand_unit = "units/pusfume_weapons/pusfume_fp_spear"
+-- ItemMasterList.es_2h_heavy_spear.right_hand_unit = "units/pusfume_weapons/pusfume_fp_spear"
 
-Cosmetics.skin_dr_ranger.first_person_attachment.unit = "units/pusfume_1p/pusfume_fp_bod"
-Cosmetics.skin_dr_ranger.first_person_attachment.attachment_node_linking = AttachmentNodeLinking.pusfume_first_person
+-- Cosmetics.skin_dr_ranger.first_person_attachment.unit = "units/pusfume_1p/pusfume_fp_bod"
+-- Cosmetics.skin_dr_ranger.first_person_attachment.attachment_node_linking = AttachmentNodeLinking.pusfume_first_person
 
 
 
+-- local world = Managers.world:world("level_world")
+-- local player = Managers.player:local_player()
+-- local player_unit = player.player_unit
+-- local position = Unit.local_position(player_unit, 0) 
+-- local rotation = Unit.local_rotation(player_unit, 0)
+-- local unit_spawner = Managers.state.unit_spawner
+-- local unit_template_name = "interaction_unit"
+-- local extension_init_data = {}
+-- local unit, go_id = unit_spawner:spawn_local_unit("units/pusfume_1p/pusfume_fp_bod", position, rotation)
+-- Unit.animation_event(unit, "idle_spear")
+-- mod:echo(Unit.node(unit, "DEF-spine"))
+-- local pusfume_first_person = {
+--     {
+--         target = 0,
+--         source = 0,
+--     },
+    
+-- }
+-- local unit2, go_id2 = unit_spawner:spawn_local_unit("units/beings/player/dwarf_ranger_upgraded/first_person_base/chr_first_person_mesh", position, rotation)
+-- AttachmentUtils.link(world, player_unit, unit, pusfume_first_person)

@@ -600,7 +600,7 @@ AttachmentNodeLinking.pusfume = {
 AttachmentNodeLinking.pusfume_first_person = {
     {
         target = 0,
-        source = "root_point",
+        source = 0,
     },
     -- {
     --     target = "DEF-spine",
