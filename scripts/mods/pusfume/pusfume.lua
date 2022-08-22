@@ -13,8 +13,12 @@ Wwise.load_bank("wwise/pusfume")
 
 mod.refreshed_convos = table.clone(mod.pusfume_conversations)
 mod.previous_convos = {}
+mod.attached_units = {}
+mod.pusfume_unit = {}
 mod.player_list = nil
 mod.current_sound = nil
+mod.player_hot_join = false
+mod.pusfumed_spawned = false
 mod.time = -1
 math.randomseed(1)
 local i = 0
@@ -114,8 +118,7 @@ function mod.update()
 end
 
 
-mod.attached_units = {}
-mod.pusfume_unit = {}
+
 
 mod:command("spawn_pusfume", "", function() 
     local unit_marker = math.random(10000)

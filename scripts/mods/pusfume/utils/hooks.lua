@@ -45,7 +45,23 @@ mod:hook(LocalizationManager, "_base_lookup", function (func, self, text_id)
 end)
 
 
+--tells the host that a player is hot joining and to send all players a spawn pusfume request
+mod:hook(GameModeManager, "rpc_to_client_spawn_player", function (func, self, channel_id, local_player_id, profile_index, career_index, position, rotation, is_initial_spawn)
+    mod:network_send("rpc_request_pusfume_inn", "others")
+    return func(self, channel_id, local_player_id, profile_index, career_index, position, rotation, is_initial_spawn)
+end)
 
+--resets the list of pusfume when a new level is loaded
+mod:hook(LevelTransitionHandler, "load_current_level", function(func, self)
+    for k,v in pairs(mod.pusfume_unit) do 
+        table.remove(mod.pusfume_unit, k)
+    end
+
+    for k,v in pairs(mod.attached_units) do 
+        table.remove(mod.attached_units, k)
+    end
+    return func(self)
+end)
 
 --makes sure that the disc's extension data is applied to the unit; prevents crashing when of other clients/host when interacting with the disc
 mod:hook(ScriptUnit, "extension", function(func, unit_1, system_name)

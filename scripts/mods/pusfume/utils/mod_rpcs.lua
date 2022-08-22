@@ -3,31 +3,31 @@ local mod = get_mod("pusfume")
 
 --rpcs to spawn pusfume and attachments in keep
 mod:network_register("rpc_request_pusfume_inn", function(sender, unit_mark)
-    local world = Managers.world:world("level_world")
-    local position = Vector3(25.4691+0.5, 33.7466, 7.013)
-    local rotation = Quaternion.from_elements(0,0,-0.77054,0.637392)    
-    local unit_spawner = Managers.state.unit_spawner
-    local unit_template_name = "interaction_unit"
-    local extension_init_data = {}
-    local unit, go_id = unit_spawner:spawn_network_unit("units/pusfume/collision", unit_template_name, extension_init_data, position, rotation)
-    local unit2 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn", position, rotation)
-    local unit3 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn_fur", position, rotation)
-    Unit.disable_animation_state_machine(unit3)
-    Unit.set_data(unit, "unit_marker", unit_mark)
+    if not mod.pusfume_unit['unit'] then
+        local world = Managers.world:world("level_world")
+        local position = Vector3(25.4691+0.5, 33.7466, 7.013)
+        local rotation = Quaternion.from_elements(0,0,-0.77054,0.637392)    
+        local unit_spawner = Managers.state.unit_spawner
+        local unit_template_name = "interaction_unit"
+        local extension_init_data = {}
+        local unit, go_id = unit_spawner:spawn_network_unit("units/pusfume/collision", unit_template_name, extension_init_data, position, rotation)
+        local unit2 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn", position, rotation)
+        local unit3 = Managers.state.unit_spawner:spawn_local_unit("units/pusfume/pusfume_inn_fur", position, rotation)
+        Unit.disable_animation_state_machine(unit3)
+        Unit.set_data(unit, "unit_marker", unit_mark)
 
-    mod.pusfume_unit['unit'] = unit
-    
-    World.link_unit(world, unit, Unit.node(unit, "collision"), unit2, Unit.node(unit2, "collision"))
+        mod.pusfume_unit['unit'] = unit
+        
+        World.link_unit(world, unit, Unit.node(unit, "collision"), unit2, Unit.node(unit2, "collision"))
 
-    mod.attached_units[unit_mark] = {
-        source = unit,
-        target = unit2, 
-    }
+        mod.attached_units[unit_mark] = {
+            source = unit,
+            target = unit2, 
+        }
 
-    mod:echo(position)
-    mod:echo(rotation)
-    -- mod:echo(Unit.get_data(unit, "unique_id"))
-    AttachmentUtils.link(world, unit2, unit3, AttachmentNodeLinking.pusfume)
+        AttachmentUtils.link(world, unit2, unit3, AttachmentNodeLinking.pusfume)
+
+    end
 end)
 
 --rpc to animate pusfume
