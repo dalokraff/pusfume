@@ -54,11 +54,11 @@ end)
 --resets the list of pusfume when a new level is loaded
 mod:hook(LevelTransitionHandler, "load_current_level", function(func, self)
     for k,v in pairs(mod.pusfume_unit) do 
-        table.remove(mod.pusfume_unit, k)
+        mod.pusfume_unit['unit'] = nil
     end
 
     for k,v in pairs(mod.attached_units) do 
-        table.remove(mod.attached_units, k)
+        mod.attached_units = {}
     end
     return func(self)
 end)
@@ -202,21 +202,23 @@ mod:hook(Unit, "animation_event", function (func, unit, event)
         local player_position = Unit.local_position(player_unit, 0)
         local pusfume_position = Vector3(-9999,0,0)
 
-        if Unit.alive(mod.pusfume_unit['unit']) then
-            pusfume_position = Unit.local_position(mod.pusfume_unit['unit'], 0)
-            local dif_vec = player_position - pusfume_position 
-            local plane_dist = math.sqrt(math.pow(dif_vec['x'], 2) + math.pow(dif_vec['z'], 2))
-            if plane_dist < 2 then
-                local last_time = Unit.get_data(unit, 'startled_pusfume') or 1
-                if not Unit.get_data(unit, 'startled_pusfume') then
-                    Unit.set_data(unit, 'startled_pusfume', true)
-                    local unit_marker = Unit.get_data(mod.pusfume_unit['unit'], "unit_marker")
-                    local anim_id = NetworkLookup.anims["interact"]
-                    mod:network_send("rpc_send_pusfume_anim","all", unit_marker, anim_id)
-                    -- Unit.animation_event(mod.pusfume_unit['unit'], 'interact')
+        if mod.pusfume_unit then
+            if Unit.alive(mod.pusfume_unit['unit']) then
+                pusfume_position = Unit.local_position(mod.pusfume_unit['unit'], 0)
+                local dif_vec = player_position - pusfume_position 
+                local plane_dist = math.sqrt(math.pow(dif_vec['x'], 2) + math.pow(dif_vec['z'], 2))
+                if plane_dist < 2 then
+                    local last_time = Unit.get_data(unit, 'startled_pusfume') or 1
+                    if not Unit.get_data(unit, 'startled_pusfume') then
+                        Unit.set_data(unit, 'startled_pusfume', true)
+                        local unit_marker = Unit.get_data(mod.pusfume_unit['unit'], "unit_marker")
+                        local anim_id = NetworkLookup.anims["interact"]
+                        mod:network_send("rpc_send_pusfume_anim","all", unit_marker, anim_id)
+                        -- Unit.animation_event(mod.pusfume_unit['unit'], 'interact')
+                    end
+                elseif plane_dist > 4 then
+                    Unit.set_data(unit, 'startled_pusfume', false)
                 end
-            elseif plane_dist > 4 then
-                Unit.set_data(unit, 'startled_pusfume', false)
             end
         end
     end

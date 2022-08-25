@@ -16,6 +16,9 @@ mod:network_register("rpc_request_pusfume_inn", function(sender, unit_mark)
         Unit.disable_animation_state_machine(unit3)
         Unit.set_data(unit, "unit_marker", unit_mark)
 
+        local stool_unit = Managers.state.unit_spawner:spawn_local_unit("units/props/generic/generic_prop_stool", position + Vector3(0.4,0,0), rotation)
+        Unit.set_local_scale(stool_unit,0, Vector3(1.3,1.3,1.3))
+
         mod.pusfume_unit['unit'] = unit
         
         World.link_unit(world, unit, Unit.node(unit, "collision"), unit2, Unit.node(unit2, "collision"))
